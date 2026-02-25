@@ -21,9 +21,15 @@ button {
     min-width: 70px;
 }
 
-#clear_btn {
+#clear {
     width: 100%;
     margin-top: 10px;
+    background-color: #c0736cff;
+    color: white;
+}
+#divide, #multiply, #subtract, #add, #equals {
+    background-color: #74b2c4ff;
+    color: white;
 }
 
 .container {
@@ -43,8 +49,12 @@ button {
     height: 100px;
     padding: 10px;
     margin-bottom: 20px;
-    font-size: 4.5rem;
+    font-size: 3rem;
     text-align: right;
+    letter-spacing: 0.3rem;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
 }
 
 .btn_container {

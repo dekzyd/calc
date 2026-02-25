@@ -5,6 +5,7 @@ let operator;
 
 // get when a btn is clicked
 const allBtns = document.querySelectorAll('button')
+const digits = document.querySelectorAll('.digit')
 const display = document.querySelector('.display');
 
 allBtns.forEach(btn => {
