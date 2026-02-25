@@ -3,8 +3,16 @@ let firstNum;
 let secondNum;
 let operator;
 
+// get when a btn is clicked
+const allBtns = document.querySelectorAll('button')
+const display = document.querySelector('.display');
 
-console.log('operate', operate('/', 100, 2))
+allBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+        console.log(btn.textContent);
+        display.textContent += btn.textContent;
+    })
+})
 
 
 
