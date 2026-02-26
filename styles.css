@@ -18,7 +18,7 @@ button {
     flex: 1;
     justify-content: center;
     align-items: center;
-    min-width: 70px;
+    min-width: 65px;
 }
 
 #clear {
@@ -27,7 +27,7 @@ button {
     background-color: #c0736cff;
     color: white;
 }
-#divide, #multiply, #subtract, #add, #equals {
+.operator, #equals {
     background-color: #74b2c4ff;
     color: white;
 }

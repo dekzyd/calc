@@ -1,45 +1,90 @@
-const body = document.querySelector('body');
-let firstNum;
-let secondNum;
-let operator;
+const display = document.querySelector(".display");
+const digits = document.querySelectorAll(".digit");
+const operators = document.querySelectorAll(".operator");
+const equalsBtn = document.getElementById("equals");
+const clearBtn = document.getElementById("clear");
 
-// get when a btn is clicked
-const allBtns = document.querySelectorAll('button')
-const digits = document.querySelectorAll('.digit')
-const display = document.querySelector('.display');
+let firstNum = "";
+let secondNum = "";
+let operator = null;
+let resultDisplayed = false;
 
-allBtns.forEach(btn => {
-    btn.addEventListener('click', () => {
-        console.log(btn.textContent);
-        display.textContent += btn.textContent;
-    })
-})
+function render() {
+  if (!operator) {
+    display.textContent = firstNum || "0";
+  } else {
+    display.textContent = secondNum || firstNum;
+  }
+}
+
+function calculate() {
+  const a = parseFloat(firstNum);
+  const b = parseFloat(secondNum);
+
+  if (operator === "+") return add(a, b);
+  if (operator === "-") return subtract(a, b);
+  if (operator === "*") return multiply(a, b);
+  if (operator === "/") return b !== 0 ? divide(a, b) : "Error";
+}
+
+digits.forEach(btn => {
+  btn.addEventListener("click", () => {
+    if (resultDisplayed) {
+      firstNum = "";
+      secondNum = "";
+      operator = null;
+      resultDisplayed = false;
+    }
+
+    if (!operator) {
+      firstNum += btn.textContent;
+    } else {
+      secondNum += btn.textContent;
+    }
+
+    render();
+  });
+});
+
+operators.forEach(btn => {
+  btn.addEventListener("click", () => {
+    if (!firstNum) return;
+
+    if (firstNum && secondNum) {
+      const result = calculate();
+      firstNum = result.toString();
+      secondNum = "";
+    }
+
+    operator = btn.textContent;
+    resultDisplayed = false;
+    render();
+  });
+});
+
+equalsBtn.addEventListener("click", () => {
+  if (!firstNum || !operator || !secondNum) return;
+
+  const result = calculate();
+  display.textContent = result;
+
+  firstNum = result.toString();
+  secondNum = "";
+  operator = null;
+  resultDisplayed = true;
+});
+
+clearBtn.addEventListener("click", () => {
+  firstNum = "";
+  secondNum = "";
+  operator = null;
+  resultDisplayed = false;
+  render();
+});
 
 
 
 // Util functions
-function operate(operator, num1, num2) {
-    let sum;
-    switch (operator) {
-        case '+':
-            sum = add(num1, num2)
-            break;
-        case '-':
-            sum = subtract(num1,num2)
-            break;
-         case '*':
-            sum = multiply(num1, num2)
-            break;
-        case '/':
-            sum = divide(num1,num2)
-            break;
-    
-        default:
-            break;
-    }
-    return sum
-
-}
 function add(a, b) {
     return a + b;
 }
